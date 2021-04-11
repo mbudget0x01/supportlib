@@ -2,6 +2,16 @@ plugins {
     id 'com.android.library'
 }
 
+//get git Hash
+def getGitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -10,7 +20,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
-        versionName "0.9"
+        versionName "0.9.0"
+        versionNameSuffix = "-"+getGitHash()+"-dev"
+        buildConfigField "String", "GIT_HASH", "\"${getGitHash()}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
