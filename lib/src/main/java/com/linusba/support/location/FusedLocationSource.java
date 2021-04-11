@@ -22,6 +22,9 @@ import java.util.List;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+/**
+ * Implementation of FusedLocationProviderClient with use case Interface ready to use
+ */
 public class FusedLocationSource extends LocationCallback implements LocationSource, LocationListener {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
