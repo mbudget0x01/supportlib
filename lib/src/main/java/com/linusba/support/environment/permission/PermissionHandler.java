@@ -25,6 +25,30 @@ public class PermissionHandler {
         BasePermissionHandler.addBasePermissions(basePermissions);
     }
 
+    /**
+     * Adds an android Permission to the handler
+     * @param basePermission Permission you wish to add
+     */
+    public static void addBasePermission(String basePermission){
+        BasePermissionHandler.addBasePermission(basePermission);
+    }
+
+    /**
+     * Removes an android Permission from Handler
+     * @param basePermission Permission you want to remove
+     * @return True if permission was known to the handler
+     */
+    public static boolean removeBasePermission(String basePermission){
+        return BasePermissionHandler.removeBasePermission(basePermission);
+    }
+
+    /**
+     * Returns an array of all Base Permissions
+     * @return Array of All Base Permissions
+     */
+    public static String[] getBasePermissions(){
+        return BasePermissionHandler.getBasePermissions();
+    }
 
     /* ***************************************************
      *
