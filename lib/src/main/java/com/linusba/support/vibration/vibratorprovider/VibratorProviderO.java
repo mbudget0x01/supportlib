@@ -1,11 +1,13 @@
 package com.linusba.support.vibration.vibratorprovider;
 
+import android.Manifest;
 import android.content.Context;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 
 import androidx.annotation.RequiresApi;
+import androidx.annotation.RequiresPermission;
 
 import com.linusba.support.vibration.VibratorUtil;
 
@@ -26,10 +28,13 @@ class VibratorProviderO implements IVibratorProvider {
     }
 
     @Override
+    @RequiresPermission(Manifest.permission.VIBRATE)
     public void startVibrator(final long period) {
 
         if(timerTask == null) {
             timerTask = new TimerTask() {
+                //needed as this is anonymous
+                @RequiresPermission(Manifest.permission.VIBRATE)
                 public void run() {
                     if (!vibratorState) {
                         vibrator.vibrate(VibrationEffect.createOneShot(period, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -47,6 +52,7 @@ class VibratorProviderO implements IVibratorProvider {
     }
 
     @Override
+    @RequiresPermission(Manifest.permission.VIBRATE)
     public void stopVibrator() {
         timerTask.cancel();
         vibrator.cancel();
@@ -54,6 +60,7 @@ class VibratorProviderO implements IVibratorProvider {
     }
 
     @Override
+    @RequiresPermission(Manifest.permission.VIBRATE)
     public boolean isVibrating() {
         return _isVibrating;
     }
