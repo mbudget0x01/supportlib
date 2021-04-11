@@ -53,7 +53,7 @@ class BasePermissionHandler {
      * @return Array containing the permissions
      */
     public static String[] getBasePermissions() {
-        return basePermissions.toArray(new String[basePermissions.size()]);
+        return basePermissions.toArray(new String[0]);
     }
 
     /**
