@@ -61,7 +61,7 @@ public class FusedLocationSource extends LocationCallback implements LocationSou
     private void init(Context context, Integer updateInterval, Integer maxWaitTime, Integer locationRequestPriority){
         checkPermissions(context);
         fusedLocationProviderClient = new FusedLocationProviderClient(context);
-        LocationRequest locationRequest = new LocationRequest();
+        LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setInterval(updateInterval);
         locationRequest.setMaxWaitTime(maxWaitTime);
         locationRequest.setPriority(locationRequestPriority);
