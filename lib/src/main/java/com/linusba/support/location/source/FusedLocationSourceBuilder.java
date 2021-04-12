@@ -2,6 +2,8 @@ package com.linusba.support.location.source;
 
 import android.content.Context;
 import androidx.annotation.RequiresPermission;
+
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.LocationSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,21 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
  * If Values are not specified standard Values from {@link FusedLocationSource} are used.
  */
 public class FusedLocationSourceBuilder {
+
+    /**
+     * Default = 40000 milliseconds
+     */
+    public static final Integer STANDARD_INTERVAL = 4000;
+
+    /**
+     * Default = 60000 milliseconds
+     */
+    public static final Integer STANDARD_MAX_WAIT_TIME = 6000;
+
+    /**
+     * Default = PRIORITY_HIGH_ACCURACY
+     */
+    public static final Integer LOCATION_REQUEST_PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
     //Intervall in milliseconds
     private Integer standardInterval = null;
@@ -88,11 +105,19 @@ public class FusedLocationSourceBuilder {
      */
     @RequiresPermission(allOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
     public FusedLocationSource build(Context context){
+        // validate parameters
         validate();
-        FusedLocationSource fusedLocationSource = new FusedLocationSource(context,
-                standardInterval,
-                maxWaitTime,
-                locationRequestPriority);
+        //prepare Data
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LOCATION_REQUEST_PRIORITY)
+                .setMaxWaitTime(STANDARD_MAX_WAIT_TIME)
+                .setInterval(STANDARD_INTERVAL);
+
+        //Instantiate Class
+        FusedLocationSource fusedLocationSource = new FusedLocationSource(context, locationRequest);
+
+        //set Callbacks
+
         for (LocationSource.OnLocationChangedListener listener:onLocationChangedListeners) {
             fusedLocationSource.activate(listener);
         }
@@ -104,13 +129,13 @@ public class FusedLocationSourceBuilder {
      */
     private void validate(){
         if(standardInterval == null){
-            standardInterval = FusedLocationSource.STANDARD_INTERVAL;
+            standardInterval = STANDARD_INTERVAL;
         }
         if(maxWaitTime == null){
-            maxWaitTime = FusedLocationSource.STANDARD_MAX_WAIT_TIME;
+            maxWaitTime = STANDARD_MAX_WAIT_TIME;
         }
         if(locationRequestPriority == null){
-            locationRequestPriority = FusedLocationSource.LOCATION_REQUEST_PRIORITY;
+            locationRequestPriority = LOCATION_REQUEST_PRIORITY;
         }
     }
 }
