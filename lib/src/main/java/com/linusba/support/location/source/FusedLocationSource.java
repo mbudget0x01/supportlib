@@ -1,4 +1,4 @@
-package com.linusba.support.location;
+package com.linusba.support.location.source;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,11 +28,12 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class FusedLocationSource extends LocationCallback implements LocationSource, LocationListener {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationRequest locationRequest;
     private List<OnLocationChangedListener> locationChangedListeners = new ArrayList<>();
     private Location lastLocation = null;
-    private static final Integer STANDARD_INTERVAL = 4000;
-    private static final Integer STANDARD_MAX_WAIT_TIME = 6000;
-    private static final Integer LOCATION_REQUEST_PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
+    static final Integer STANDARD_INTERVAL = 4000;
+    static final Integer STANDARD_MAX_WAIT_TIME = 6000;
+    static final Integer LOCATION_REQUEST_PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
     /**
      * Implementation of FusedLocationProviderClient with use case Interface ready to use
@@ -64,7 +65,7 @@ public class FusedLocationSource extends LocationCallback implements LocationSou
     private void init(Context context, Integer updateInterval, Integer maxWaitTime, Integer locationRequestPriority){
         checkPermissions(context);
         fusedLocationProviderClient = new FusedLocationProviderClient(context);
-        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest = LocationRequest.create();
         locationRequest.setInterval(updateInterval);
         locationRequest.setMaxWaitTime(maxWaitTime);
         locationRequest.setPriority(locationRequestPriority);
@@ -116,4 +117,5 @@ public class FusedLocationSource extends LocationCallback implements LocationSou
             }
         }
     }
+
 }
