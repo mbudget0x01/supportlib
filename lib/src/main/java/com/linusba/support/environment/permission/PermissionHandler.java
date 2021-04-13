@@ -14,39 +14,25 @@ import java.util.List;
  * for this app.
  */
 
-public class PermissionHandler {
+public abstract class PermissionHandler {
 
     /**
-     * Set the initial Base Permissions you need to have granted for your app
-     * @param basePermissions Array of Permissions
-     * @see Manifest.permission
+     * Instantiate Class
+     * @param basePermissions the Permissions you wish to handle
      */
-    public static void setBasePermissions(String[] basePermissions){
-        BasePermissionHandler.addBasePermissions(basePermissions);
+    public PermissionHandler(String[] basePermissions){
+        setBasePermissions(basePermissions);
     }
 
-    /**
-     * Adds an android Permission to the handler
-     * @param basePermission Permission you wish to add
-     */
-    public static void addBasePermission(String basePermission){
-        BasePermissionHandler.addBasePermission(basePermission);
-    }
-
-    /**
-     * Removes an android Permission from Handler
-     * @param basePermission Permission you want to remove
-     * @return True if permission was known to the handler
-     */
-    public static boolean removeBasePermission(String basePermission){
-        return BasePermissionHandler.removeBasePermission(basePermission);
+    private void setBasePermissions(String[] basePermissions){
+        BasePermissionHandler.basePermissions = basePermissions;
     }
 
     /**
      * Returns an array of all Base Permissions
      * @return Array of All Base Permissions
      */
-    public static String[] getBasePermissions(){
+    public String[] getBasePermissions(){
         return BasePermissionHandler.getBasePermissions();
     }
 
@@ -61,7 +47,7 @@ public class PermissionHandler {
      * @param activity Activity for Context
      * @return List of Missing Permissions
      */
-    public static String[] checkBasePermissions(Activity activity){
+    public String[] checkBasePermissions(Activity activity){
         return checkBasePermissions(activity.getBaseContext());
     }
 
@@ -70,7 +56,7 @@ public class PermissionHandler {
      * @param context Context
      * @return List of Missing Permissions
      */
-    public static String[] checkBasePermissions(Context context){
+    public String[] checkBasePermissions(Context context){
         List<String> missingPermissions = BasePermissionHandler.checkBasePermissions(context);
         String [] resp = new String[missingPermissions.size()];
         return missingPermissions.toArray(resp);
@@ -82,7 +68,7 @@ public class PermissionHandler {
      * @param context Context for reference
      * @return true if Permission needs to be requested
      */
-    public static boolean needNotificationPolicyPermission(Context context){
+    public boolean needNotificationPolicyPermission(Context context){
         return SpecialPermissionHandler.needNotificationPolicyPermission(context);
     }
 
@@ -91,7 +77,7 @@ public class PermissionHandler {
      * @param activity Activity for Context
      * @return true if Permission needs to be requested
      */
-    public static boolean needDrawOverlayPermission(Activity activity){
+    public boolean needDrawOverlayPermission(Activity activity){
         return SpecialPermissionHandler.needDrawOverlayPermission(activity);
     }
 
@@ -108,7 +94,7 @@ public class PermissionHandler {
      * @param permissions Android Permissions
      * @see Manifest.permission
      */
-    public static void requestBasePermissions(Activity activity, String[] permissions ){
+    public void requestBasePermissions(Activity activity, String[] permissions ){
         BasePermissionHandler.requestBasePermissions(permissions, activity);
     }
 
@@ -117,7 +103,7 @@ public class PermissionHandler {
      * @param activity Activity for Context
      * @see Manifest.permission, BASE_PERMISSIONS
      */
-    public static void requestBasePermissions(Activity activity){
+    public void requestBasePermissions(Activity activity){
         BasePermissionHandler.requestAllBasePermissions(activity);
     }
 
@@ -127,7 +113,7 @@ public class PermissionHandler {
      */
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static void requestNotificationPolicyPermission(Activity activity){
+    public void requestNotificationPolicyPermission(Activity activity){
         SpecialPermissionHandler.requestNotificationPolicyPermission(activity);
     }
 
@@ -135,7 +121,7 @@ public class PermissionHandler {
      * Method to request the Allow Draw Overlay Permission
      * @param activity Activity for Context
      */
-    public static void requestDrawOverlayPermission(Activity activity){
+    public void requestDrawOverlayPermission(Activity activity){
         SpecialPermissionHandler.requestDrawOverlayPermission(activity);
     }
 

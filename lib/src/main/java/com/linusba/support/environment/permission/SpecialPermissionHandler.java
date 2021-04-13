@@ -17,9 +17,9 @@ class SpecialPermissionHandler {
     private static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 5469;
 
     /**
-     * Checks if Notification Policy is needed.
+     * Checks if Notification Policy can be requested and is not granted.
      * @param context Context for reference
-     * @return true if Permission needs to be requested
+     * @return true if Permission can be requested and is not granted.
      */
     public static boolean needNotificationPolicyPermission(Context context){
         //check if Version compatible
@@ -36,9 +36,9 @@ class SpecialPermissionHandler {
     }
 
     /**
-     * Checks if Draw Overlay Permission can be requested and is not granted
+     * Checks if Draw Overlay Permission can be requested and is not granted.
      * @param activity Activity for Context
-     * @return true if Permission needs to be requested
+     * @return true if Permission can be requested and is not granted.
      */
     public static boolean needDrawOverlayPermission(Activity activity){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

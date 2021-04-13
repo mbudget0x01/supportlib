@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
-import com.linusba.support.environment.permission.PermissionHandler;
+import com.linusba.support.environment.permission.PermissionChecker;
 
 /**
  * Provides the Ringtone Provider according to the API
@@ -50,7 +50,7 @@ public class RingtoneProviderFactory {
      */
     private static boolean canDisableDoNotDisturb(Context context){
         //To avoid Security Exceptions we check here
-        return !PermissionHandler.needNotificationPolicyPermission(context);
+        return !PermissionChecker.needNotificationPolicyPermission(context);
     }
 
 }
