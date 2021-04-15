@@ -66,7 +66,8 @@ public abstract class PermissionHandler {
     /**
      * Checks if Notification Policy is needed.
      * @param context Context for reference
-     * @return true if Permission needs to be requested
+     * @return true if Permission can be requested and is not granted. False if
+     * is not required by api or is granted.
      */
     public boolean needNotificationPolicyPermission(Context context){
         return SpecialPermissionHandler.needNotificationPolicyPermission(context);
@@ -75,7 +76,8 @@ public abstract class PermissionHandler {
     /**
      * Checks if Draw Overlay Permission can be requested and is not granted
      * @param activity Activity for Context
-     * @return true if Permission needs to be requested
+     * @return true if Permission can be requested and is not granted. False if
+     * is not required by api or is granted.
      */
     public boolean needDrawOverlayPermission(Activity activity){
         return SpecialPermissionHandler.needDrawOverlayPermission(activity);
@@ -121,6 +123,7 @@ public abstract class PermissionHandler {
      * Method to request the Allow Draw Overlay Permission
      * @param activity Activity for Context
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void requestDrawOverlayPermission(Activity activity){
         SpecialPermissionHandler.requestDrawOverlayPermission(activity);
     }

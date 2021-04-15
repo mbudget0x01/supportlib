@@ -1,5 +1,6 @@
 package com.linusba.support.location.source;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.os.Looper;
@@ -38,10 +39,12 @@ public class FusedLocationSource extends LocationCallback implements LocationSou
      * @param locationRequest The Location Request with the needed paramters
      * @see LocationRequest
      */
+    @SuppressLint("VisibleForTests")
     @RequiresPermission(allOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
     public FusedLocationSource(Context context, LocationRequest locationRequest){
         this.locationRequest = locationRequest;
-        fusedLocationProviderClient = new FusedLocationProviderClient(context);
+        //We can ignore visible for tests as we capsulated this and need the context
+        this.fusedLocationProviderClient = new FusedLocationProviderClient(context);
         enableLocationUpdates();
 
     }
