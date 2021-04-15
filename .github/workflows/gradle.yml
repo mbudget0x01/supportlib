@@ -28,4 +28,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: lib
-        path: lib/build/outputs/apk/aar/lib-release.aar
+        path: lib/build/outputs/aar/lib-release.aar
