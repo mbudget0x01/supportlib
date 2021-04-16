@@ -28,4 +28,7 @@ jobs:
         name: lib
         path: lib/build/outputs/aar/lib-release.aar
     - name: Publish mvn pkg
+      env:
+        PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+        PUBLISH_USER: ${{ secrets.PUBLISH_USER }}
       run: ./gradlew publish
