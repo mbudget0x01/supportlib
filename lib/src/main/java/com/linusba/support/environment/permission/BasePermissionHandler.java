@@ -15,45 +15,14 @@ import java.util.List;
  */
 class BasePermissionHandler {
 
-    private static List<String> basePermissions = new ArrayList<>();
-
-    /**
-     * Add a BasePermission you want to have granted
-     * @param basePermission the Permission to add
-     */
-    public static void addBasePermission(String basePermission){
-        if(basePermissions.contains(basePermission)){
-            return;
-        }
-        basePermissions.add(basePermission);
-    }
-
-    /**
-     * Add an Array of Base Permissions
-     * Added for implementation convenience
-     * @param basePermissions Array of Permissions
-     */
-    public static void addBasePermissions(String[] basePermissions){
-        for(String permission: basePermissions){
-            addBasePermission(permission);
-        }
-    }
-
-    /**
-     * Remove a Base Permission you don't want to have checked
-     * @param basePermission the Permission to Remove
-     * @return true if contained permission
-     */
-    public static boolean removeBasePermission(String basePermission){
-        return basePermissions.remove(basePermission);
-    }
+    public static String[] basePermissions;
 
     /**
      * Returns an Array containing all base Permissions
      * @return Array containing the permissions
      */
     public static String[] getBasePermissions() {
-        return basePermissions.toArray(new String[basePermissions.size()]);
+        return basePermissions;
     }
 
     /**
