@@ -18,12 +18,12 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class FusedLocationSourceBuilder {
 
     /**
-     * Default = 40000 milliseconds
+     * Default = 4000 milliseconds
      */
     public static final Integer STANDARD_INTERVAL = 4000;
 
     /**
-     * Default = 60000 milliseconds
+     * Default = 6000 milliseconds
      */
     public static final Integer STANDARD_MAX_WAIT_TIME = 6000;
 
