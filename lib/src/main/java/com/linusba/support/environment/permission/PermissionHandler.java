@@ -13,7 +13,6 @@ import java.util.List;
  * Provides all functionality to Handle the permissions
  * for this app.
  */
-
 public abstract class PermissionHandler {
 
     /**
