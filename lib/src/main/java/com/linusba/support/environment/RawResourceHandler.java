@@ -1,6 +1,8 @@
 package com.linusba.support.environment;
 
-import android.app.Activity;
+import android.content.Context;
+
+import androidx.annotation.RawRes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,13 +18,13 @@ public class RawResourceHandler {
     /**
      * Returns the content of e raw Resource e.g. a json file.
      * @param resourceId e.g. R.raw.xyz.json
-     * @param activity The calling Activity for Context
+     * @param context The calling Context
      * @return The content of the resource as String
      * @throws IOException In Case something goes wrong loading.
      * @see android.R.raw
      */
-    public static String loadStringResource(int resourceId, Activity activity) throws IOException {
-        InputStream inputStream = activity.getResources().openRawResource(resourceId);
+    public static String loadStringResource(@RawRes int resourceId, Context context) throws IOException {
+        InputStream inputStream = context.getResources().openRawResource(resourceId);
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line = "";
