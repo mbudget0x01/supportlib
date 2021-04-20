@@ -33,11 +33,15 @@ public class RingtonePickerUtil {
         return new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
     }
     /**
-     * Handles a RintonePicker response
+     * Handles a RingtonePicker response
      * @param data Intent from Activity Result
-     * @return URI of the file as String
+     * @return URI of the file as String, null if data not available
      */
+    @Nullable
     public static String handleRingtonePickerResponse(@Nullable Intent data){
+        if(data == null){
+            return null;
+        }
         return String.valueOf(data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
     }
 
