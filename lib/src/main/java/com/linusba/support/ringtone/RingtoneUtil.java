@@ -9,14 +9,22 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+/**
+ * Util to interact deal with Ringtone related stuff
+ */
 public class RingtoneUtil {
 
-    /****************************************************
+    /* ***************************************************
      *
      * Interruption Filter
      *
      ****************************************************/
 
+    /**
+     * Returns the current interruption filter
+     * @param context Context for reference
+     * @return int representation of the Interruption Filter
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static int getCurrentInterruptionFilter(Context context){
        return getNotificationManager(context).getCurrentInterruptionFilter();
@@ -38,11 +46,17 @@ public class RingtoneUtil {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
-    /****************************************************
+    /* ***************************************************
      *
      * Audio Manager
      *
      ****************************************************/
+
+    /**
+     * Returns the current ringer mode
+     * @param context Context for reference
+     * @return int representation of the Ringer Mode
+     */
     public static int getCurrentRingerMode(Context context){
         return getAudioManager(context).getRingerMode();
     }

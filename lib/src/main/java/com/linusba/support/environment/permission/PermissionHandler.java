@@ -13,7 +13,6 @@ import java.util.List;
  * Provides all functionality to Handle the permissions
  * for this app.
  */
-
 public abstract class PermissionHandler {
 
     /**
@@ -43,7 +42,7 @@ public abstract class PermissionHandler {
      ****************************************************/
 
     /**
-     * Checks all the Android Permissions specified in BASE_PERMISSIONS
+     * Checks all the Android Permissions specified @see getBasePermissions
      * @param activity Activity for Context
      * @return List of Missing Permissions
      */
@@ -52,7 +51,7 @@ public abstract class PermissionHandler {
     }
 
     /**
-     * Checks all the Android Permissions specified in BASE_PERMISSIONS
+     * Checks all the Android Permissions specified @see getBasePermissions
      * @param context Context
      * @return List of Missing Permissions
      */
