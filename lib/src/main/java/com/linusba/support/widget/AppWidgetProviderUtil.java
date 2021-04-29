@@ -16,7 +16,7 @@ public class AppWidgetProviderUtil {
      * Returns a new Broadcasting Pending intent Pointing to the cls
      * @param context Context for reference
      * @param action the Action for the Intent Action
-     * @param cls class its pointing to
+     * @param cls class its pointing to, typically your AppWidgetProvider
      * @return Pending Intent
      */
     public static PendingIntent getPendingActionIntent(Context context, String action, Class<?> cls) {
@@ -28,7 +28,7 @@ public class AppWidgetProviderUtil {
     /**
      * Request an Update at the AppWidgetManager.
      * @param context Context for Reference
-     * @param remoteViews Updated Remote Views
+     * @param remoteViews Updated Remote Views matching the AppWidgetProvider
      * @param cls Class of the AppWidgetProvider
      */
     public static void requestUpdate(Context context, RemoteViews remoteViews, Class<?> cls) {
