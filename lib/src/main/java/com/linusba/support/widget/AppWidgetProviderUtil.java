@@ -31,7 +31,7 @@ public class AppWidgetProviderUtil {
      * @param remoteViews Updated Remote Views
      * @param cls Class of the AppWidgetProvider
      */
-    static void requestUpdate(Context context, RemoteViews remoteViews, Class<?> cls) {
+    public static void requestUpdate(Context context, RemoteViews remoteViews, Class<?> cls) {
         ComponentName componentName = new ComponentName(context, cls);
         AppWidgetManager.getInstance(context).updateAppWidget(componentName, remoteViews);
     }
