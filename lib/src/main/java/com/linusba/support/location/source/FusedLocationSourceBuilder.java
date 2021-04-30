@@ -109,9 +109,9 @@ public class FusedLocationSourceBuilder {
         validate();
         //prepare Data
         LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LOCATION_REQUEST_PRIORITY)
-                .setMaxWaitTime(STANDARD_MAX_WAIT_TIME)
-                .setInterval(STANDARD_INTERVAL);
+        locationRequest.setPriority(locationRequestPriority)
+                .setMaxWaitTime(maxWaitTime)
+                .setInterval(standardInterval);
 
         //Instantiate Class
         FusedLocationSource fusedLocationSource = new FusedLocationSource(context, locationRequest);
