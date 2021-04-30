@@ -32,7 +32,7 @@ public class FusedLocationSourceBuilder {
      */
     public static final Integer LOCATION_REQUEST_PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
-    //Intervall in milliseconds
+    //Interval in milliseconds
     private Integer standardInterval = null;
     //max Wait Time in milliseconds
     private Integer maxWaitTime = null;
@@ -40,7 +40,7 @@ public class FusedLocationSourceBuilder {
     private final List<LocationSource.OnLocationChangedListener> onLocationChangedListeners = new ArrayList<>();
 
     /**
-     * Desired update Intervall for Loction Updates
+     * Desired update Interval for Location Updates
      * @param milliseconds time in milliseconds
      * @return this for chaining
      */
@@ -50,7 +50,7 @@ public class FusedLocationSourceBuilder {
     }
 
     /**
-     * Desired update Intervall for Loction Updates
+     * Desired update Interval for Location Updates
      * @param seconds time in seconds
      * @return this for chaining
      */
@@ -59,7 +59,7 @@ public class FusedLocationSourceBuilder {
     }
 
     /**
-     * Desired max Update Intervall for Loction Updates
+     * Desired max Update Interval for Location Updates
      * @param milliseconds time in milliseconds
      * @return this for chaining
      */
@@ -70,7 +70,7 @@ public class FusedLocationSourceBuilder {
 
 
     /**
-     * Desired max Update Intervall for Loction Updates
+     * Desired max Update Interval for Location Updates
      * @param seconds time in milliseconds
      * @return this for chaining
      */
