@@ -21,7 +21,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 30
         versionCode 1
-        versionName "1.1.0"
+        versionName "1.2.0"
         versionNameSuffix = "-"+getGitHash()+"-stable"
         buildConfigField "String", "GIT_HASH", "\"${getGitHash()}\""
 
@@ -56,7 +56,7 @@ dependencies {
 //publishing stuff
 //repo version
 def getVersionName = { ->
-    return "1.1.0"
+    return "1.2.0"
 }
 
 def getArtifactId = { ->
