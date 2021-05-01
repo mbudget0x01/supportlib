@@ -99,7 +99,8 @@ public class FusedLocationSourceBuilder {
     }
 
     /**
-     * Returns a new Instance of Fused Location Source
+     * Returns a new Instance of Fused Location Source.
+     * If a parameter is not set a Standard value will be set.
      * @param context Context for Reference
      * @return FusedLocationSource
      */
