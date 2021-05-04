@@ -33,7 +33,7 @@ public class AppWidgetCoordinator extends BroadcastReceiver {
     /**
      * Request Update of the Widget via Action
      */
-    public static final String ACTION_CODE_PROPERTY_CHANGED = "action.property.changed";
+    static final String ACTION_CODE_PROPERTY_CHANGED = "action.property.changed";
 
     /**
      * Identifier for callbacks only used for callback handling in {@link android.appwidget.AppWidgetProvider} subclasses
@@ -165,7 +165,7 @@ public class AppWidgetCoordinator extends BroadcastReceiver {
      * @param property changed property
      * @throws PendingIntent.CanceledException can be thrown on send()
      */
-    static void sendOnPropertyChanged(Context context, @Nullable String property) throws PendingIntent.CanceledException {
+    public static void sendOnPropertyChanged(Context context, @Nullable String property) throws PendingIntent.CanceledException {
         getPendingOnPropertyChangedIntent(context, property).send();
     }
 

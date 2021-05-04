@@ -90,8 +90,13 @@ public abstract class CallbackAppWidgetProvider extends AppWidgetProvider {
      * Subscribe for Callback
      * @param context {@link AppWidgetProvider}s Context
      * @param cls Your subclass
+     * @throws IllegalArgumentException in case your class is not a subclass of {@link CallbackAppWidgetProvider}
      */
-    public static void subscribeOnPropertyChangedCallback(Context context, Class<?> cls){
+    public static void subscribeOnPropertyChangedCallback(Context context, Class<?> cls) throws IllegalArgumentException{
+        if(!isValidCallback(cls)){
+            throw new IllegalArgumentException("Must be of type : " +
+                    CallbackAppWidgetProvider.class.getName());
+        }
         AppWidgetCoordinator.registerOnPropertyChangedCallback(context,cls);
     }
 
@@ -101,6 +106,16 @@ public abstract class CallbackAppWidgetProvider extends AppWidgetProvider {
      * @param cls Your subclass
      */
     public static void unsubscribeOnPropertyChangedCallback(Context context, Class<?> cls){
+        //We can ignore checks here as we just delete
         AppWidgetCoordinator.deregisterOnPropertyChangedCallback(context,cls);
+    }
+
+    /**
+     * Checks if the class has Callback Handling
+     * @param cls Your Class
+     * @return True if valid.
+     */
+    private static boolean isValidCallback(Class<?> cls){
+        return CallbackAppWidgetProvider.class.isAssignableFrom(cls);
     }
 }
