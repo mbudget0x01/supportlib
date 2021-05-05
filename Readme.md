@@ -20,8 +20,8 @@ Here ou see some classes which need explanation
 ### com.linusba.support.widget
 
 Containing Classes to handle AppWidgets.
-The AppWidgetCoordinator distributes callbacks to all subscribed classes.
-You can send Callbacks by using AppWidgetCoordinator.sendOnPropertyChanged(context, property).
+The `AppWidgetCoordinator` distributes callbacks to all subscribed classes.
+You can send Callbacks by using `AppWidgetCoordinator.sendOnPropertyChanged(context, property)`.
 
 ### com.linusba.support.location.source
 
