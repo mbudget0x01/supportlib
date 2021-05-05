@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.linusba.support.environment.SharedPreferencesUtil;
 
@@ -91,7 +92,8 @@ public class AppWidgetCoordinator extends BroadcastReceiver {
      * @param cls class to check
      * @return True if registered
      */
-    static boolean classHasCallbackRegistered(Context context ,Class<?> cls){
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+    public static boolean classHasCallbackRegistered(Context context ,Class<?> cls){
         return getCallbackClasses(context).contains(cls);
     }
 

@@ -5,7 +5,6 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.linusba.support.widget.AppWidgetCoordinator;
 import com.linusba.support.widget.CallbackAppWidgetProvider;
@@ -14,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
@@ -24,6 +24,8 @@ import static org.junit.Assert.assertTrue;
 public class AppWidgetCallbackTest {
 
     private static final String CHANGED_PROPERTY_NAME = "test.property";
+    MyAppWidgetProvider myAppWidgetProvider = new MyAppWidgetProvider();
+    AppWidgetCoordinator appWidgetCoordinator = new AppWidgetCoordinator();
 
     /**
      * Tests the Callback fo a onPropertyChanged Callback
@@ -31,20 +33,45 @@ public class AppWidgetCallbackTest {
     @Test
     public void onPropertyChangedCallbackTest() {
         // Context of the app under test.
-        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        MyAppWidgetProvider myAppWidgetProvider = new MyAppWidgetProvider();
+        Context context = TestHelper.getAppContext();
         MyAppWidgetProvider.subscribeOnPropertyChangedCallback(context, MyAppWidgetProvider.class);
-        AppWidgetCoordinator appWidgetCoordinator = new AppWidgetCoordinator();
         try {
             AppWidgetCoordinator.sendOnPropertyChanged(context,CHANGED_PROPERTY_NAME);
         } catch (PendingIntent.CanceledException e) {
             assertTrue(e.getMessage(),true);
         }
-
         MyAppWidgetProvider.unsubscribeOnPropertyChangedCallback(context,MyAppWidgetProvider.class);
 
     }
 
+    /**
+     * Tests the local Callback Mechanism if no callback is subscribed
+     */
+    @Test
+    public void onPropertyChangedLocalTest(){
+        Context context = TestHelper.getAppContext();
+        assertFalse(AppWidgetCoordinator.classHasCallbackRegistered(context, MyAppWidgetProvider.class));
+        myAppWidgetProvider.onPropertyChanged(context, CHANGED_PROPERTY_NAME);
+    }
+
+    /**
+     * Tries to subscribe a class which is not allowed
+     */
+    @Test
+    public void wrongClassSubscription(){
+        Context context = TestHelper.getAppContext();
+        try {
+            CallbackAppWidgetProvider.subscribeOnPropertyChangedCallback(context, String.class);
+        }catch (IllegalArgumentException ex) {
+            assertEquals(ex.getClass(), IllegalArgumentException.class);
+            return;
+        }
+        assertTrue("No exception thrown!",true);
+    }
+
+    /**
+     *  Subclass of {@link CallbackAppWidgetProvider} for tests
+     */
     private static class MyAppWidgetProvider extends CallbackAppWidgetProvider{
         public MyAppWidgetProvider(){
             super();
