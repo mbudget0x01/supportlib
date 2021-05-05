@@ -1,8 +1,8 @@
-#Changelog
+# Changelog
 
 Starting from Version 1.1.1
 
-#Version 1.1.1
+## Version 1.1.1
 * fixes a bug in location.FusedLocationSourceBuilder.build()
 
 ## Version 1.2
