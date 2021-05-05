@@ -9,6 +9,24 @@ you have to generate it yourself.
 
 Min api is 15.
 
+## Add the Library (Gradle)
+
+1. Add the package information from the Github Package to your `build.gradle`
+2. add the following repository to yours.
+```groovy
+
+repositories {
+    maven {
+        url = "https://maven.pkg.github.com/mbudget0x01/supportlib"
+        credentials {
+            username = 'YourUserName'
+            //This key is public until there is another solution
+            password = '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'
+        }
+    }
+}
+```
+
 ## Changelog
 
 There is a Changelog available: [Link](Changelog.md)
