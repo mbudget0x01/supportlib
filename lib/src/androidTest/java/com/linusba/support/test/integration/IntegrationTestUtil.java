@@ -1,4 +1,4 @@
-package com.linusba.support;
+package com.linusba.support.test.integration;
 
 import android.content.Context;
 
@@ -7,12 +7,12 @@ import androidx.test.platform.app.InstrumentationRegistry;
 /**
  * Helper Class for Test functions. Only static
  */
-public class TestUtil {
+public class IntegrationTestUtil {
 
     /**
      * Private constructor as we don't need Instances
      */
-    private TestUtil(){}
+    private IntegrationTestUtil(){}
 
     /**
      * Gets the AppContext

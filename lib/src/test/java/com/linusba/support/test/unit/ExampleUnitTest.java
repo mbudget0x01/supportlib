@@ -1,4 +1,4 @@
-package com.linusba.support;
+package com.linusba.support.test.unit;
 
 import org.junit.Test;
 

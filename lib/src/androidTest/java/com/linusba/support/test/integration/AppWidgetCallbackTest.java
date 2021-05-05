@@ -1,4 +1,4 @@
-package com.linusba.support;
+package com.linusba.support.test.integration;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,8 +24,9 @@ import static org.junit.Assert.assertTrue;
 public class AppWidgetCallbackTest {
 
     private static final String CHANGED_PROPERTY_NAME = "test.property";
-    MyAppWidgetProvider myAppWidgetProvider = new MyAppWidgetProvider();
-    AppWidgetCoordinator appWidgetCoordinator = new AppWidgetCoordinator();
+    private final MyAppWidgetProvider myAppWidgetProvider = new MyAppWidgetProvider();
+    //do not remove
+    private final AppWidgetCoordinator appWidgetCoordinator = new AppWidgetCoordinator();
 
     /**
      * Tests the Callback fo a onPropertyChanged Callback
@@ -33,7 +34,7 @@ public class AppWidgetCallbackTest {
     @Test
     public void onPropertyChangedCallbackTest() {
         // Context of the app under test.
-        Context context = TestUtil.getAppContext();
+        Context context = IntegrationTestUtil.getAppContext();
         MyAppWidgetProvider.subscribeOnPropertyChangedCallback(context, MyAppWidgetProvider.class);
         try {
             AppWidgetCoordinator.sendOnPropertyChanged(context,CHANGED_PROPERTY_NAME);
@@ -49,7 +50,7 @@ public class AppWidgetCallbackTest {
      */
     @Test
     public void onPropertyChangedLocalTest(){
-        Context context = TestUtil.getAppContext();
+        Context context = IntegrationTestUtil.getAppContext();
         assertFalse(AppWidgetCoordinator.classHasCallbackRegistered(context, MyAppWidgetProvider.class));
         myAppWidgetProvider.onPropertyChanged(context, CHANGED_PROPERTY_NAME);
     }
@@ -59,7 +60,7 @@ public class AppWidgetCallbackTest {
      */
     @Test
     public void wrongClassSubscription(){
-        Context context = TestUtil.getAppContext();
+        Context context = IntegrationTestUtil.getAppContext();
         try {
             CallbackAppWidgetProvider.subscribeOnPropertyChangedCallback(context, String.class);
         }catch (IllegalArgumentException ex) {
