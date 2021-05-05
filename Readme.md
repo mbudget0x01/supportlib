@@ -21,7 +21,7 @@ repositories {
         credentials {
             username = 'YourUserName'
             //This key is public until there is another solution
-            password = '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'
+            password = 'get token from pkg description'
         }
     }
 }
