@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import static com.linusba.support.widget.AppWidgetCoordinator.ACTION_CODE_CALLBACK_INTERNAL;
 import static com.linusba.support.widget.AppWidgetCoordinator.INTENT_STRING_EXTRA_CHANGED_PROPERTY;
@@ -105,6 +106,7 @@ public abstract class CallbackAppWidgetProvider extends AppWidgetProvider {
      * @param context {@link AppWidgetProvider}s Context
      * @param cls Your subclass
      */
+    @VisibleForTesting
     public static void unsubscribeOnPropertyChangedCallback(Context context, Class<?> cls){
         //We can ignore checks here as we just delete
         AppWidgetCoordinator.deregisterOnPropertyChangedCallback(context,cls);
@@ -115,6 +117,7 @@ public abstract class CallbackAppWidgetProvider extends AppWidgetProvider {
      * @param cls Your Class
      * @return True if valid.
      */
+    @VisibleForTesting
     private static boolean isValidCallback(Class<?> cls){
         return CallbackAppWidgetProvider.class.isAssignableFrom(cls);
     }
