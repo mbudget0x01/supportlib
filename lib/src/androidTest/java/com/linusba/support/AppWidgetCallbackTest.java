@@ -33,7 +33,7 @@ public class AppWidgetCallbackTest {
     @Test
     public void onPropertyChangedCallbackTest() {
         // Context of the app under test.
-        Context context = TestHelper.getAppContext();
+        Context context = TestUtil.getAppContext();
         MyAppWidgetProvider.subscribeOnPropertyChangedCallback(context, MyAppWidgetProvider.class);
         try {
             AppWidgetCoordinator.sendOnPropertyChanged(context,CHANGED_PROPERTY_NAME);
@@ -49,7 +49,7 @@ public class AppWidgetCallbackTest {
      */
     @Test
     public void onPropertyChangedLocalTest(){
-        Context context = TestHelper.getAppContext();
+        Context context = TestUtil.getAppContext();
         assertFalse(AppWidgetCoordinator.classHasCallbackRegistered(context, MyAppWidgetProvider.class));
         myAppWidgetProvider.onPropertyChanged(context, CHANGED_PROPERTY_NAME);
     }
@@ -59,7 +59,7 @@ public class AppWidgetCallbackTest {
      */
     @Test
     public void wrongClassSubscription(){
-        Context context = TestHelper.getAppContext();
+        Context context = TestUtil.getAppContext();
         try {
             CallbackAppWidgetProvider.subscribeOnPropertyChangedCallback(context, String.class);
         }catch (IllegalArgumentException ex) {
