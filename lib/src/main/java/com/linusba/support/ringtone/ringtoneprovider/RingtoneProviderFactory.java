@@ -20,7 +20,7 @@ public class RingtoneProviderFactory {
      * @param ignoreDoNotDisturb set True if do Not Disturb should be ignored
      * @return IRingtoneProvider Instance according to your API
      */
-    public static IRingtoneProvider getIntsance(Context context,boolean ignoreDoNotDisturb){
+    public static IRingtoneProvider getInstance(Context context, boolean ignoreDoNotDisturb){
 
         //Version M supports Interruption Filter, possible depreciated Methods
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
