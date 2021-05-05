@@ -9,7 +9,13 @@ you have to generate it yourself.
 
 Min api is 15.
 
+## Changelog
+
+There is a Changelog available: [Link](Changelog.md)
+
 ## Noteworthy Classes and Modules
+
+Here ou see some classes which need explanation
 
 ## com.linusba.support.widget
 
