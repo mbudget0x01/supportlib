@@ -26,7 +26,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: lib
-        path: lib/build/outputs/aar/lib-release.aar
+        path: lib/build/outputs/aar/*
     - name: Publish mvn pkg
       env:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
