@@ -21,7 +21,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 30
         versionCode 1
-        versionName "1.2.0"
+        versionName "1.2.1"
         versionNameSuffix = "-"+getGitHash()+"-stable"
         buildConfigField "String", "GIT_HASH", "\"${getGitHash()}\""
 
@@ -34,15 +34,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    libraryVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFileName = "supportlib-${variant.name}-v${defaultConfig.versionName}.aar"
+        }
     }
 }
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -56,11 +65,11 @@ dependencies {
 //publishing stuff
 //repo version
 def getVersionName = { ->
-    return "1.2.0"
+    return "1.2.1"
 }
 
 def getArtifactId = { ->
-    return "lib-release.aar"
+    return "lib-release.aar "
 }
 
 def getGroupId = { ->
@@ -70,27 +79,34 @@ def getGroupId = { ->
 def getGitHubUrl = { ->
     return "https://maven.pkg.github.com/mbudget0x01/supportlib"
 }
-
-publishing {
-    publications {
-        bar(MavenPublication) {
-            groupId getGroupId()
-            artifactId getArtifactId()
-            version getVersionName()
-            // Place the path of your artifact here
-            artifact("$buildDir/outputs/aar/${getArtifactId()}")
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId getGroupId()
+                artifactId getArtifactId()
+                version getVersionName()
+                artifact(sourceJar)
+            }
         }
-    }
-    repositories {
-        maven {
-            name = "GitHubPackages"
+        repositories {
+            maven {
+                name = "GitHubPackages"
 
-            url = uri(getGitHubUrl())
-            credentials {
-                username = System.getenv("PUBLISH_USER")
-                password = System.getenv("PUBLISH_TOKEN")
+                url = uri(getGitHubUrl())
+                credentials {
+                    username = System.getenv("PUBLISH_USER")
+                    password = System.getenv("PUBLISH_TOKEN")
+                }
             }
         }
     }
 }
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
 

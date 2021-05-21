@@ -6,8 +6,6 @@
 
 This is a small lib for my android applications. The purpose of this lib is to keep
 the whole boilerplate code together and maintain it in a central place.
-Everything should be documented using Javadoc. As there is no good solution for me to generate it,
-you have to generate it yourself.
 
 Min api is 15.
 
