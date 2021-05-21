@@ -69,7 +69,7 @@ def getVersionName = { ->
 }
 
 def getArtifactId = { ->
-    return "lib-release.aar"
+    return "lib-release.aar "
 }
 
 def getGroupId = { ->
@@ -87,6 +87,7 @@ afterEvaluate {
                 groupId getGroupId()
                 artifactId getArtifactId()
                 version getVersionName()
+                artifact(sourceJar)
             }
         }
         repositories {
@@ -102,3 +103,10 @@ afterEvaluate {
         }
     }
 }
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
+
