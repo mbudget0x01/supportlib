@@ -69,7 +69,7 @@ def getVersionName = { ->
 }
 
 def getArtifactId = { ->
-    return "lib-release.aar "
+    return "lib-release.aar"
 }
 
 def getGroupId = { ->
