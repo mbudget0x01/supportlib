@@ -22,3 +22,4 @@ Starting from Version 1.1.1
 * Lifted `com.google.android.material:material:1.3.0` to `com.google.android.material:material:1.4.0`
 * Lifted `androidx.test.ext:junit:1.1.2` to `androidx.test.ext:junit:1.1.3`
 * Lifted `androidx.test.espresso:espresso-core:3.3.0` to `androidx.test.espresso:espresso-core:3.4.0`
+
