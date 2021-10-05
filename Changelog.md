@@ -23,3 +23,6 @@ Starting from Version 1.1.1
 * Lifted `androidx.test.ext:junit:1.1.2` to `androidx.test.ext:junit:1.1.3`
 * Lifted `androidx.test.espresso:espresso-core:3.3.0` to `androidx.test.espresso:espresso-core:3.4.0`
 
+## Version 1.3.0
+* Replaced `RingtonePickerUtil` with `RingtonePicker` to use the ` Activity Result API` 
+* Replaced `ContactPickerUtil` with `ContactPicker` to use the ` Activity Result API`
