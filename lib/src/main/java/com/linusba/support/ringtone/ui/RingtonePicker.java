@@ -28,6 +28,11 @@ public class RingtonePicker {
         prepareLauncher(caller, callback);
     }
 
+    /**
+     * Prepares the launcher for Activity Result
+     * @param caller parent Activity or Fragment or what else
+     * @param callback The callback to use for this
+     */
     private void prepareLauncher(ActivityResultCaller caller, RingtonePickerCallback callback){
         this.launcher = caller.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -37,7 +42,7 @@ public class RingtonePicker {
     }
 
     /**
-     * Launches The Contact Picker
+     * Launches The Ringtone Picker
      */
     public void launch(){
         launcher.launch(getIntent());
