@@ -26,3 +26,6 @@ Starting from Version 1.1.1
 ## Version 1.3.0
 * Replaced `RingtonePickerUtil` with `RingtonePicker` to use the ` Activity Result API` 
 * Replaced `ContactPickerUtil` with `ContactPicker` to use the ` Activity Result API`
+
+## Version 1.3.1
+* Added `ContactUtil`
