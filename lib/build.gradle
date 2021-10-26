@@ -68,6 +68,7 @@ dependencies {
 
 //publishing stuff
 //repo version
+
 def getArtifactId = { ->
     return "lib-release.aar"
 }
