@@ -33,3 +33,5 @@ Starting from Version 1.1.1
 ## Version 1.3.2
 * Added `androidx.preference:preference` as dependency
 * Added `IntEditTextPreference`
+* Added `PhoneNumberPreference`
+* Added `PhoneNumberContactPreference`
