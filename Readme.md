@@ -44,3 +44,7 @@ You can send Callbacks by using `AppWidgetCoordinator.sendOnPropertyChanged(cont
 ### com.linusba.support.location.source
 
 This holds some ready to use Classes covering most use-cases. See Javadoc for mor information.
+
+### com.linusba.support.preference
+
+This package holds some custom `androidx.preferences` integrated RingtonePicker, IntValue as Input etc...
