@@ -35,3 +35,7 @@ Starting from Version 1.1.1
 * Added `IntEditTextPreference`
 * Added `PhoneNumberPreference`
 * Added `PhoneNumberContactPreference`
+
+## Version 1.3.3
+* Added `RingtonePreference`
+* Added `RingtonePickerPreference`
