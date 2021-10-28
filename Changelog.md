@@ -39,3 +39,4 @@ Starting from Version 1.1.1
 ## Version 1.3.3
 * Added `RingtonePreference`
 * Added `RingtonePickerPreference`
+* Minor Bugfix in `PhoneNumberPreference`

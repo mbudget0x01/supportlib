@@ -109,7 +109,9 @@ public class PhoneNumberPreference extends Preference implements SharedPreferenc
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        updateSummary();
+        if(key.equals(getKey())) {
+            updateSummary();
+        }
     }
 
 }

@@ -113,6 +113,8 @@ public class RingtonePreference extends Preference implements SharedPreferences.
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        updateSummary();
+        if(key.equals(getKey())) {
+            updateSummary();
+        }
     }
 }
