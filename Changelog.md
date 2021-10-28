@@ -35,3 +35,9 @@ Starting from Version 1.1.1
 * Added `IntEditTextPreference`
 * Added `PhoneNumberPreference`
 * Added `PhoneNumberContactPreference`
+
+## Version 1.3.3
+* Added `RingtonePreference`
+* Added `RingtonePickerPreference`
+* Minor Bugfix in `PhoneNumberPreference`
+* Lifted `com.google.android.gms:play-services-maps:17.0.1` to `com.google.android.gms:play-services-maps:18.0.0`
