@@ -44,3 +44,8 @@ Starting from Version 1.1.1
 
 ## Version 1.3.3
 * Updated Target SDK to 31
+* Lifted `androidx.appcompat:appcompat:1.3.1` to `androidx.appcompat:appcompat:1.4.1`
+* Lifted `com.google.android.material:material:1.4.0` to `com.google.android.material:material:1.5.0`
+* Lifted `androidx.preference:preference:1.1.1` to `androidx.preference:preference:1.2.0`
+* Lifted `com.google.android.gms:play-services-location:18.0.0` to `com.google.android.gms:play-services-location:19.0.1`
+* Lifted `com.google.android.gms:play-services-maps:18.0.0` to `com.google.android.gms:play-services-maps:18.0.2`
