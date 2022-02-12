@@ -40,7 +40,7 @@ Starting from Version 1.1.1
 * Added `RingtonePreference`
 * Added `RingtonePickerPreference`
 * Minor Bugfix in `PhoneNumberPreference`
-* Lifted `com.google.android.gms:play-services-maps:17.0.1` to `com.google.android.gms:play-services-maps:18.0.0`
+* Lifted `com.google.android.gms:play-services-maps:17.0.1` to `com.google.android.gms:play-services-maps:18.0.0
 
 ## Version 1.3.4
 * Updated Target SDK to 31
