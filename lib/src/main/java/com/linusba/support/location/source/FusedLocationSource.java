@@ -1,11 +1,15 @@
 package com.linusba.support.location.source;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -18,35 +22,60 @@ import com.google.android.gms.maps.LocationSource;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
 /**
  * Implementation of FusedLocationProviderClient with use case Interface ready to use
  */
 public class FusedLocationSource extends LocationCallback implements LocationSource, LocationListener {
 
-    private final FusedLocationProviderClient fusedLocationProviderClient;
-    private final LocationRequest locationRequest;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationRequest locationRequest;
     private List<OnLocationChangedListener> locationChangedListeners = new ArrayList<>();
     private Location lastLocation = null;
+    private Looper looper;
     private boolean locationUpdatedEnabled = false;
 
 
     /**
      * Implementation of FusedLocationProviderClient with use case Interface ready to use
      * @param context Context
-     * @param locationRequest The Location Request with the needed paramters
+     * @param locationRequest The Location Request with the needed parameters
+     * @see LocationRequest
+     */
+    @RequiresPermission(allOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
+    public FusedLocationSource(Context context, LocationRequest locationRequest){
+        init(context,locationRequest,null);
+    }
+
+    /**
+     * Implementation of FusedLocationProviderClient with use case Interface ready to use
+     * @param context Context
+     * @param locationRequest The Location Request with the needed parameters
+     * @param looper The looper to use for Location updates. Essentially the thread to use.
+     *               If looper is null the default looper will be used.
+     * @see LocationRequest
+     */
+    @RequiresPermission(allOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
+    public FusedLocationSource(Context context, LocationRequest locationRequest,@Nullable Looper looper){
+        init(context, locationRequest, looper);
+    }
+
+
+    /**
+     * Initialization to support multiple constructors
+     * @param context Context
+     * @param locationRequest The Location Request with the needed parameters
+     * @param looper The looper to use for Location updates. Essentially the thread to use.
+     *               If looper is null the default looper will be used.
      * @see LocationRequest
      */
     @SuppressLint("VisibleForTests")
     @RequiresPermission(allOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
-    public FusedLocationSource(Context context, LocationRequest locationRequest){
+    private void init(Context context, LocationRequest locationRequest,@Nullable Looper looper){
+        this.looper = looper;
         this.locationRequest = locationRequest;
         //We can ignore visible for tests as we capsulated this and need the context
         this.fusedLocationProviderClient = new FusedLocationProviderClient(context);
         enableLocationUpdates();
-
     }
 
     @Override
@@ -57,7 +86,7 @@ public class FusedLocationSource extends LocationCallback implements LocationSou
     }
 
     @Override
-    public void activate(OnLocationChangedListener onLocationChangedListener) {
+    public void activate(@NonNull OnLocationChangedListener onLocationChangedListener) {
         locationChangedListeners.add(onLocationChangedListener);
     }
 
@@ -99,7 +128,13 @@ public class FusedLocationSource extends LocationCallback implements LocationSou
         if(locationUpdatedEnabled){
             return;
         }
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, this, Looper.getMainLooper());
+        Looper locationLooper;
+        if(this.looper != null){
+            locationLooper = looper;
+        } else {
+            locationLooper = Looper.getMainLooper();
+        }
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, this, locationLooper);
         locationUpdatedEnabled = true;
     }
 

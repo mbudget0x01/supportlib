@@ -49,3 +49,5 @@ Starting from Version 1.1.1
 * Lifted `androidx.preference:preference:1.1.1` to `androidx.preference:preference:1.2.0`
 * Lifted `com.google.android.gms:play-services-location:18.0.0` to `com.google.android.gms:play-services-location:19.0.1`
 * Lifted `com.google.android.gms:play-services-maps:18.0.0` to `com.google.android.gms:play-services-maps:18.0.2`
+* `FusedLocationSource` supports now optional Loopers
+* `FusedLocationSourceBuilder` has now the option to run in a separate Thread
