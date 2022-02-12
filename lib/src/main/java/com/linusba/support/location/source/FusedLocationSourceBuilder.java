@@ -1,15 +1,20 @@
 package com.linusba.support.location.source;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.content.Context;
+import android.os.HandlerThread;
+import android.os.Looper;
+
 import androidx.annotation.RequiresPermission;
 
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.LocationSource;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import java.util.UUID;
 
 /**
  * Provides chainable functions to build an Location Source, adds execution Time.
@@ -37,6 +42,7 @@ public class FusedLocationSourceBuilder {
     //max Wait Time in milliseconds
     private Integer maxWaitTime = null;
     private Integer locationRequestPriority = null;
+    private Looper looper = null;
     private final List<LocationSource.OnLocationChangedListener> onLocationChangedListeners = new ArrayList<>();
 
     /**
@@ -99,6 +105,33 @@ public class FusedLocationSourceBuilder {
     }
 
     /**
+     * Defines if the Location Updates run on the Main Thread or a new thread.
+     * @param runSeparate spawns a new thread if true
+     * @return this for chaining
+     */
+    public FusedLocationSourceBuilder runInSeparateThread(boolean runSeparate){
+        if(runSeparate && looper == null){
+            this.looper = getNewLooper();
+        } else {
+            looper = null;
+        }
+        return this;
+    }
+
+
+    /**
+     * Instantiates a new Looper Thread to pass to the FusedLocationSource
+     * @return a new Looper
+     */
+    private Looper getNewLooper(){
+        UUID threadUUID = UUID.randomUUID();
+        String threadName = "LocationSource-" + threadUUID.toString();
+        HandlerThread handlerThread = new HandlerThread(threadName);
+        handlerThread.start();
+        return handlerThread.getLooper();
+    }
+
+    /**
      * Returns a new Instance of Fused Location Source.
      * If a parameter is not set a Standard value will be set.
      * @param context Context for Reference
@@ -115,7 +148,7 @@ public class FusedLocationSourceBuilder {
                 .setInterval(standardInterval);
 
         //Instantiate Class
-        FusedLocationSource fusedLocationSource = new FusedLocationSource(context, locationRequest);
+        FusedLocationSource fusedLocationSource = new FusedLocationSource(context, locationRequest,looper);
 
         //set Callbacks
 

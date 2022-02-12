@@ -40,4 +40,14 @@ Starting from Version 1.1.1
 * Added `RingtonePreference`
 * Added `RingtonePickerPreference`
 * Minor Bugfix in `PhoneNumberPreference`
-* Lifted `com.google.android.gms:play-services-maps:17.0.1` to `com.google.android.gms:play-services-maps:18.0.0`
+* Lifted `com.google.android.gms:play-services-maps:17.0.1` to `com.google.android.gms:play-services-maps:18.0.0
+
+## Version 1.3.4
+* Updated Target SDK to 31
+* Lifted `androidx.appcompat:appcompat:1.3.1` to `androidx.appcompat:appcompat:1.4.1`
+* Lifted `com.google.android.material:material:1.4.0` to `com.google.android.material:material:1.5.0`
+* Lifted `androidx.preference:preference:1.1.1` to `androidx.preference:preference:1.2.0`
+* Lifted `com.google.android.gms:play-services-location:18.0.0` to `com.google.android.gms:play-services-location:19.0.1`
+* Lifted `com.google.android.gms:play-services-maps:18.0.0` to `com.google.android.gms:play-services-maps:18.0.2`
+* `FusedLocationSource` supports now optional Loopers
+* `FusedLocationSourceBuilder` has now the option to run in a separate Thread
