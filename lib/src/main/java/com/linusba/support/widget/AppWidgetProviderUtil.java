@@ -1,10 +1,12 @@
 package com.linusba.support.widget;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.widget.RemoteViews;
 
 /**
@@ -19,10 +21,16 @@ public class AppWidgetProviderUtil {
      * @param cls class its pointing to, typically your AppWidgetProvider
      * @return Pending Intent
      */
+    @SuppressLint("UnspecifiedImmutableFlag")
     public static PendingIntent getPendingActionIntent(Context context, String action, Class<?> cls) {
         Intent intent = new Intent(context, cls);
         intent.setAction(action);
-        return PendingIntent.getBroadcast(context, 0, intent, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            //lint -> immutable flag is handled above
+            return PendingIntent.getBroadcast(context, 0, intent, 0);
+        }
     }
 
     /**
