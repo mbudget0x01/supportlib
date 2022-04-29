@@ -1,9 +1,11 @@
 package com.linusba.support.widget;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -127,6 +129,7 @@ public class AppWidgetCoordinator extends BroadcastReceiver {
      * Notifies all registered callbacks of a Property Changed event
      * @param context App Context
      */
+    @SuppressLint("UnspecifiedImmutableFlag")
     private void notifyOnPropertyChanged(Context context, Intent intent){
         String changedProperty = null;
         if(intent.hasExtra(INTENT_STRING_EXTRA_CHANGED_PROPERTY)) {
@@ -139,7 +142,13 @@ public class AppWidgetCoordinator extends BroadcastReceiver {
                 if(changedProperty != null) {
                     callbackIntent.putExtra(INTENT_STRING_EXTRA_CHANGED_PROPERTY, changedProperty);
                 }
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, callbackIntent, 0);
+                PendingIntent pendingIntent;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    pendingIntent = PendingIntent.getBroadcast(context, 0, callbackIntent, PendingIntent.FLAG_IMMUTABLE);
+                } else {
+                    // immutable is set above -> ignore lint
+                    pendingIntent = PendingIntent.getBroadcast(context, 0, callbackIntent, 0);
+                }
                 pendingIntent.send();
             }catch (Exception e){
                 Log.w(TAG,e);
@@ -178,12 +187,17 @@ public class AppWidgetCoordinator extends BroadcastReceiver {
      * @param property the changed property or null
      * @return Pending Intent
      */
+    @SuppressLint("UnspecifiedImmutableFlag")
     static PendingIntent getPendingOnPropertyChangedIntent(Context context, @Nullable String property) {
         Intent intent = new Intent(context, AppWidgetCoordinator.class);
         if(property != null) {
             intent.putExtra(AppWidgetCoordinator.INTENT_STRING_EXTRA_CHANGED_PROPERTY, property);
         }
         intent.setAction(AppWidgetCoordinator.ACTION_CODE_PROPERTY_CHANGED);
-        return PendingIntent.getBroadcast(context, 0, intent, 0);
-    }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            //immutable flag is handled above
+            return PendingIntent.getBroadcast(context, 0, intent, 0);
+        }}
 }
