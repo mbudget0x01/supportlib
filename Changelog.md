@@ -54,3 +54,6 @@ Starting from Version 1.1.1
 
 ## Version 1.3.5
 * Fixes an error occurring on Android 12 (S+) concerning `PendingIntent` Flags
+
+## Version 1.3.6
+* Added `RingtoneProviderS` as silent will be treated as dnd
