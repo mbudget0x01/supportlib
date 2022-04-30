@@ -28,10 +28,17 @@ public class RingtoneProviderFactory {
             return new RingtoneProviderM(canDisableDoNotDisturb(context) && ignoreDoNotDisturb ,context);
         }
 
-        //newest and standard Ringtone
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+        //standard Ringtone
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && Build.VERSION.SDK_INT < Build.VERSION_CODES.S){
             loggingLoadedInstance(RingtoneProviderP.class.getSimpleName());
             return new RingtoneProviderP(canDisableDoNotDisturb(context) && ignoreDoNotDisturb,context);
+        }
+
+        // Android had behavioral changes in DND
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            loggingLoadedInstance(RingtoneProviderS.class.getSimpleName());
+            boolean canDisableDND = canDisableDoNotDisturb(context);
+            return new RingtoneProviderS(canDisableDND, canDisableDND && ignoreDoNotDisturb, context);
         }
 
         //legacy support, no interruption filter, possible depreciated Methods
