@@ -8,6 +8,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -16,6 +17,7 @@ import com.linusba.support.ringtone.RingtoneUtil;
 @RequiresApi(api = Build.VERSION_CODES.S)
 public class RingtoneProviderS implements IRingtoneProvider {
 
+    private static final String TAG = RingtoneProviderS.class.getSimpleName();
     private boolean canDisableDoNotDisturb;
     private boolean shouldAndCanIgnoreDoNotDisturb;
     private int originalRingerMode, originalInterruptionFilter;
@@ -84,9 +86,18 @@ public class RingtoneProviderS implements IRingtoneProvider {
     private void setOriginalValues(Context context){
         //order matters see https://stackoverflow.com/questions/58044974/enable-silent-mode-in-android-without-triggering-do-not-disturb
         RingtoneUtil.changeRingerMode(originalRingerMode, context);
-        if(canDisableDoNotDisturb){
-            RingtoneUtil.changeInterruptionFilter(originalInterruptionFilter,context);
+
+        if(!canDisableDoNotDisturb){
+            // No need to manipulate the interruptionFilter
+            return;
         }
+
+        if(originalInterruptionFilter == 0){
+            //if interruptionFilter 0 is set an exception is thrown
+            Log.i(TAG, "setOriginalValues: Interruption Filter 0 can't be set.");
+            return;
+        }
+        RingtoneUtil.changeInterruptionFilter(originalInterruptionFilter,context);
     }
 
     private Ringtone buildRingtone(Context context, Uri customRingtone){

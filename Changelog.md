@@ -57,3 +57,12 @@ Starting from Version 1.1.1
 
 ## Version 1.3.6
 * Added `RingtoneProviderS` as silent will be treated as dnd
+
+## Version 1.3.7
+* Mitigated an issue in `RingtoneProviderS` where an error is thrown when tried to set Interruption Filter 0
+* Lifted `androidx.appcompat:appcompat:1.4.1` to `androidx.appcompat:appcompat:1.5.0`
+* Lifted `com.google.android.material:material:1.5.0` to `com.google.android.material:material:1.6.1`
+* Lifted `com.google.android.gms:play-services-location:19.0.1` to `com.google.android.gms:play-services-location:20.0.0`
+* Lifted `com.google.android.gms:play-services-maps:18.0.2` to `com.google.android.gms:play-services-maps:18.1.0`
+* Lifted minSdK Version to 19
+* Adjustments in build scripts
