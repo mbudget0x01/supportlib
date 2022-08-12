@@ -57,3 +57,6 @@ Starting from Version 1.1.1
 
 ## Version 1.3.6
 * Added `RingtoneProviderS` as silent will be treated as dnd
+
+## Version 1.3.7
+* Mitigated an issue in `RingtoneProviderS` where an error is thrown when tried to set Interruption Filter 0
